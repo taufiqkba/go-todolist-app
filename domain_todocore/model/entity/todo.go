@@ -1,6 +1,8 @@
 package entity
 
 import (
+	"github.com/taufiqkba/go-todolist-app/domain_todocore/model/errorenum"
+	"strings"
 	"time"
 
 	"github.com/taufiqkba/go-todolist-app/domain_todocore/model/vo"
@@ -10,8 +12,8 @@ type Todo struct {
 	ID      vo.TodoID `bson:"_id" json:"id"`
 	Created time.Time `bson:"created" json:"created"`
 	Updated time.Time `bson:"updated" json:"updated"`
-	Message string
-	Checked bool
+	Message string    `json:"message"`
+	Checked bool      `json:"checked"`
 
 	// edit or add new necessary field here ...
 }
@@ -19,14 +21,16 @@ type Todo struct {
 type TodoCreateRequest struct {
 	RandomString string    `json:"-"`
 	Now          time.Time `json:"-"`
+	Message      string    `json:"message"`
 
 	// edit or add new necessary field for create request here ...
 
 }
 
 func (r TodoCreateRequest) Validate() error {
-
-	// validate the create request here ...
+	if strings.TrimSpace(r.Message) == "" {
+		return errorenum.MessageMustNotEmpty
+	}
 
 	return nil
 }
@@ -47,8 +51,8 @@ func NewTodo(req TodoCreateRequest) (*Todo, error) {
 	obj.ID = id
 	obj.Created = req.Now
 	obj.Updated = req.Now
-
-	// another field input here ...
+	obj.Message = req.Message
+	obj.Checked = false
 
 	return &obj, nil
 }
