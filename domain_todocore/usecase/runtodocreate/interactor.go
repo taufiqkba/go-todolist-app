@@ -30,5 +30,6 @@ func (r *runTodoCreateInteractor) Execute(ctx context.Context, req InportRequest
 		return nil, err
 	}
 
+	res.Todo = todoObj
 	return res, nil
 }

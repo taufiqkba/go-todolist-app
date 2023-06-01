@@ -84,3 +84,13 @@ func (r *Todo) Update(req TodoUpdateRequest) error {
 
 	return nil
 }
+
+func (r *Todo) Check() error {
+
+	if r.Checked {
+		return errorenum.TodoHasBeenChecked
+	}
+	r.Checked = true
+
+	return nil
+}

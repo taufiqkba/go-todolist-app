@@ -2,6 +2,7 @@ package runtodocheck
 
 import (
 	"context"
+	"fmt"
 )
 
 type runTodoCheckInteractor struct {
@@ -18,8 +19,27 @@ func (r *runTodoCheckInteractor) Execute(ctx context.Context, req InportRequest)
 
 	res := &InportResponse{}
 
-	// code your usecase definition here ...
-	//!
+	//get data by id
+	todoObj, err := r.outport.FindOneTodoByID(ctx, req.TodoID)
+	if err != nil {
+		return nil, err
+	}
+	if todoObj == nil {
+		return nil, fmt.Errorf("object not found")
+	}
 
+	//change state to = true
+	err = todoObj.Check()
+	if err != nil {
+		return nil, err
+	}
+
+	//save to persistent storage
+	err = r.outport.SaveTodo(ctx, todoObj)
+	if err != nil {
+		return nil, err
+	}
+
+	res.Todo = todoObj
 	return res, nil
 }
