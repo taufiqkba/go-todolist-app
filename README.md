@@ -18,7 +18,7 @@ Usecase
 2. Create Model
    - Todo
 
-3. Create Usecase
+3. Create UseCase
    - RunTodoCreate
    - GetAllGoto
    - RunTodoCheck
