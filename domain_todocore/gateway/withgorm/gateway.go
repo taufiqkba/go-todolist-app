@@ -43,7 +43,7 @@ func NewGateway(log logger.Logger, appData gogen.ApplicationData, cfg *config.Co
 }
 
 func (r *gateway) FindAllTodo(ctx context.Context, page, size int) ([]*entity.Todo, int64, error) {
-	r.log.Info(ctx, "called")
+	r.log.Info(ctx, "called-FindAllTodo")
 
 	var todoObjs []*entity.Todo
 	var count int64
@@ -61,7 +61,7 @@ func (r *gateway) FindAllTodo(ctx context.Context, page, size int) ([]*entity.To
 }
 
 func (r *gateway) FindOneTodoByID(ctx context.Context, todoID vo.TodoID) (*entity.Todo, error) {
-	r.log.Info(ctx, "called")
+	r.log.Info(ctx, "called-FindOneTodoByID")
 
 	var todoObj entity.Todo
 
@@ -73,7 +73,7 @@ func (r *gateway) FindOneTodoByID(ctx context.Context, todoID vo.TodoID) (*entit
 }
 
 func (r *gateway) SaveTodo(ctx context.Context, obj *entity.Todo) error {
-	r.log.Info(ctx, "called")
+	r.log.Info(ctx, "called-SaveTodo")
 	err := r.db.Save(obj).Error
 	if err != nil {
 		return err

@@ -2,7 +2,6 @@ package getalltodo
 
 import (
 	"context"
-
 	"github.com/taufiqkba/go-todolist-app/shared/util"
 )
 
@@ -24,7 +23,6 @@ func (r *getAllTodoInteractor) Execute(ctx context.Context, req InportRequest) (
 	if err != nil {
 		return nil, err
 	}
-
 	res.Count = count
 	res.Items = util.ToSliceAny(todoObjs)
 
