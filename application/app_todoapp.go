@@ -35,7 +35,7 @@ func (todoapp) Run() error {
 	primaryDriver := restapi.NewController(appData, log, cfg, jwtToken)
 
 	primaryDriver.AddUsecase(
-		//
+		//implement useCase
 		getalltodo.NewUsecase(datasource),
 		runtodocheck.NewUsecase(datasource),
 		runtodocreate.NewUsecase(datasource),
