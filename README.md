@@ -36,3 +36,6 @@ Usecase
 
 7. Create application
    - Usecase + Gateway + Controller
+
+### Error Find
+- GET method return nil data
